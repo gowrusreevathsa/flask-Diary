@@ -9,13 +9,13 @@
     </head>
 
     <body>
-        <h3 style="text-align: center; text-transform: uppercase; margin-top: 20px;">Your personal Diary</h3>
+        <h2>Your personal Diary</h2>
         <p class="center" id="date">{{ day }} {{ month }}, {{ year }}</p> <br>
 
         <form class="center" action="{{ url_for('addNotes')}}" method="POST">
             <textarea id="notesInput" name="notes">{{ preText }}</textarea>
             <br><br><br>
-            <input type="submit" value="Make Note">
+            <input id="submitButton" type="submit" value="Make Note">
         </form>
     </body>
 </html>
