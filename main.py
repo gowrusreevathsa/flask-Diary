@@ -14,13 +14,9 @@ def write():
     todo.insert({"name":'abc'})
     return redirect('/list')
 
-@app.route('/list')
-def list():
-    t = todo.find()
-    x = ""
-    for to in t:
-        x = to['name']
-    return x
+@app.route('/showNotes/<dateid>')
+def showNotes(dateid):
+    
 
 @app.route('/addNotes/', methods = ['POST'])
 def addNotes():
