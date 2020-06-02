@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>
+            Diary
+        </title>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    </head>
+
+    <body>
+
+        <p>{{ day }} {{ month }}, {{ year }}</p> <br>
+
+        <form action="{{ url_for('addNotes')}}" method="POST">
+            <input type="text" name="notes" value="{{ preText }}">
+            <input type="submit" value="Make Note">
+        </form>
+    </body>
+</html>
