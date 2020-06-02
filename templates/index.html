@@ -5,14 +5,15 @@
         </title>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     </head>
 
     <body>
 
-        <p>{{ day }} {{ month }}, {{ year }}</p> <br>
+        <p id="date">{{ day }} {{ month }}, {{ year }}</p> <br>
 
         <form action="{{ url_for('addNotes')}}" method="POST">
-            <input type="text" name="notes" value="{{ preText }}">
+            <input id="notesInput" type="text" name="notes" value="{{ preText }}">
             <input type="submit" value="Make Note">
         </form>
     </body>
