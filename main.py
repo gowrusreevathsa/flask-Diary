@@ -19,15 +19,22 @@ def write():
     todo.insert({"name":'abc'})
     return redirect('/list')
 
+@app.route('/<dateid>')
 @app.route('/showNotes/<dateid>')
 def showNotes(dateid):
     client = MongoClient("mongodb://127.0.0.1:27017")
     db = client['dbDiary']
     coll = db['diaryNotes']
     showId = str(dateid)
+    if len(dateid) != 8:
+        return redirect(url_for('index'))
     i = coll.find_one({"_id":showId})
     dayT, monthT, yearT = detailsFromDateId(dateid)
-    return render_template('index.html', day = dayT, month = dt.date(2020, int(monthT), 1).strftime('%B'), year = yearT, preText = i['notes'])
+    if i == None:
+        preText = "Oops! You don't have any notes for this day :(" 
+        return render_template('index.html', day = dayT, month = dt.date(2020, int(monthT), 1).strftime('%B'), year = yearT, preText = preText)
+    else:
+        return render_template('index.html', day = dayT, month = dt.date(2020, int(monthT), 1).strftime('%B'), year = yearT, preText = i['notes'])
 
 @app.route('/addNotes/', methods = ['POST'])
 def addNotes():
@@ -56,6 +63,7 @@ def addNotes():
     return redirect(url_for('showNotes', dateid = id))
 
 @app.route('/')
+@app.route('/index/')
 def index():
     client = MongoClient("mongodb://127.0.0.1:27017")
     db = client['dbDiary']
