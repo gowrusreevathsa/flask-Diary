@@ -14,10 +14,16 @@ monthName = None
 id = None
 
 
-@app.route('/write')
-def write():
-    todo.insert({"name":'abc'})
-    return redirect('/list')
+@app.route('/showPrevNotes/', methods=['POST'])
+def showPrevNotes(dateidP = None):
+    if dateidP != None:
+        print(dateidP)
+        return redirect(url_for('showNotes', dateid = dateidP))
+    if request.method == 'POST':
+        dateidT = request.form
+        dateidT = dateidT['dateInput']
+    return showPrevNotes(dateidT)
+
 
 @app.route('/<dateid>')
 @app.route('/showNotes/<dateid>')
